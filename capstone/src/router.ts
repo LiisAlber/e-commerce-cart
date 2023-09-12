@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import ProductList from '@/views/ProductList.vue';
 import Cart from '@/views/Cart.vue';
+import ProductDetail from '@/components/ProductDetail.vue';
 
 
 const routes = [
@@ -16,6 +17,14 @@ const routes = [
     name: 'ProductList',
     component: ProductList
   },
+
+  {
+    path: '/product/:id',
+    name: 'ProductDetail',
+    component: ProductDetail,
+    props: true,
+  },
+  
   {
     path: '/cart',
     name: 'Cart',

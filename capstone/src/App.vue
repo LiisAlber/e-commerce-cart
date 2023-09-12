@@ -16,14 +16,18 @@
       <div v-if="isCartOpen" class="cart-overlay">
         
       </div>
+      <div v-if="isCartOpen" class="cart-overlay">
+        <!-- You might want to display cart contents here in the future -->
+      </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
-import { useCart } from './composables/useCart';
+import { useCartStore } from './stores/cartStore'; 
 
-const { isCartOpen } = useCart();
+const cartStore = useCartStore();
+const isCartOpen = cartStore.isCartOpen;  
 </script>
 
 <style>

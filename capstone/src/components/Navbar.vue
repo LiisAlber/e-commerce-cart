@@ -36,23 +36,29 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useCart } from '../composables/useCart';
+import { useCartStore } from '../stores/cartStore'; // Importing the cart store instead of the composable
 
+const cartStore = useCartStore(); // Initialize the cart store
 const menuOpen = ref(false);
 const showBurgerMenu = ref(window.innerWidth <= 768);
-const { isCartOpen, showCart, hideCart } = useCart();
+
+// Use properties and methods from the cart store
+const isCartOpen = cartStore.isCartOpen;
+const showCart = cartStore.showCart;
+const hideCart = cartStore.hideCart;
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
 };
 
 const toggleCart = () => {
-  if (isCartOpen.value) {
+  if (isCartOpen) { 
     hideCart();
   } else {
     showCart();
   }
 };
+
 
 const checkWindowSize = () => {
   showBurgerMenu.value = window.innerWidth <= 768;

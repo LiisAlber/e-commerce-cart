@@ -17,8 +17,16 @@
           <h2>{{ selectedProduct.title }}</h2>
           <img :src="selectedProduct.image" alt="selectedProduct.title" />
           <p>{{ selectedProduct.description }}</p>
-          <p>Price: {{ selectedProduct.price }}</p>
-          <button @click="addProductToCart({ id: selectedProduct.id, title: selectedProduct.title, price: selectedProduct.price, description: selectedProduct.description, category: selectedProduct.category, image: selectedProduct.image, quantity: 1 })">Add to Cart</button>
+          <p>Price: €{{ selectedProduct.price }}</p>
+          <button @click="addProductToCart({
+            id: selectedProduct.id, 
+            title: selectedProduct.title, 
+            price: selectedProduct.price, 
+            description: selectedProduct.description, 
+            category: selectedProduct.category, 
+            image: selectedProduct.image
+          })">Add to Cart</button>
+
 
           <button @click="closeModal">Close</button>
         </div>
@@ -27,16 +35,21 @@
   </template>
   
   <script lang="ts" setup>
-  import { ref, onMounted } from 'vue';
-  import ProductCard from '@/components/ProductCard.vue'; 
-  import { fakestoreAPI } from '../../api/fakeStore';
-  import { Product } from '@/types/index.ts'; 
-  import { useCart } from '../composables/useCart';
+import { ref, onMounted } from 'vue';
+import ProductCard from '@/components/ProductCard.vue'; 
+import { fakestoreAPI } from '../../api/fakeStore';
+import { Product } from '@/types/index.ts'; 
+import { useCartStore } from '../stores/cartStore'; 
   
-  const { addToCart: addProductToCart } = useCart();
+const cartStore = useCartStore();
 
-  const products = ref<Product[]>([]);
-  const expandedProductIds = ref<number[]>([]);
+const addProductToCart = (product: Product) => {
+    cartStore.addToCart(product);
+};
+
+const products = ref<Product[]>([]);
+const expandedProductIds = ref<number[]>([]);
+
   
   const isExpanded = (productId: number) => {
     return expandedProductIds.value.includes(productId);

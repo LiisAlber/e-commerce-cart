@@ -18,7 +18,7 @@
   
   <script lang="ts" setup>
 import { Product } from '@/types/index.ts';
-import { CartItem } from '@/types/index.ts'; 
+import { CartItemType } from '@/types/index.ts'; 
 
 
 const props = defineProps({
@@ -43,7 +43,7 @@ const props = defineProps({
     required: true
   },
   onAddToCart: {
-    type: Function as unknown as () => (product: CartItem) => void,
+    type: Function as unknown as () => (product: CartItemType) => void,
     required: true
   },
   onSelectProduct: {
