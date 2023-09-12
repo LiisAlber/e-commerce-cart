@@ -55,19 +55,19 @@ const goToCart = () => {
 
 <style scoped>
 .product-detail {
-  max-width: 600px; /* Adjust the maximum width as needed */
+  max-width: 600px; 
   margin: 0 auto;
-  padding: 10px; /* Adjust the padding as needed */
+  padding: 10px; 
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .product-image {
-  max-width: 100%; /* Limit image width */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; 
+  height: auto; 
   margin-bottom: 20px;
-  display: block; /* Ensure the image respects max-width */
+  display: block; 
 }
 
 .product-description {

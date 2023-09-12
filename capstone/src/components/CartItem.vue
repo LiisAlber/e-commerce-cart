@@ -33,18 +33,17 @@ defineProps({
 }
 
 .product-image {
-  max-width: 80px; /* Adjust the maximum width of the image as needed */
-  margin-right: 10px; /* Add some spacing between the image and text */
+  max-width: 80px; 
+  margin-right: 10px; 
 }
 
 .product-info {
-  flex-grow: 1; /* Allow the product info to expand to fill available space */
+  flex-grow: 1; 
 }
 
 .product-info h2 {
-  font-size: 16px; /* Adjust the font size of the product title */
+  font-size: 16px; 
 }
 
-/* Add more styles as needed */
 </style>
 

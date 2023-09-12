@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useCartStore } from '../stores/cartStore'; // Importing the cart store instead of the composable
+import { useCartStore } from '../stores/cartStore'; 
 
 const cartStore = useCartStore(); // Initialize the cart store
 const menuOpen = ref(false);
@@ -146,19 +146,18 @@ nav a {
     border-radius: 4px;
 }
 
-/* Changing link color on hover for better visibility */
 nav a:hover {
     color: #4C58C2;
 }
 
 .brand h1 {
     margin: 0;
-    color: #ED8936; /* Highlight color for the brand name */
+    color: #ED8936; 
 }
 
 .brand a:hover {
-    text-decoration: none; /* Remove underline on hover */
-    color: #4C58C2; /* Link color change on hover */
+    text-decoration: none; 
+    color: #4C58C2; 
 }
 
 </style>

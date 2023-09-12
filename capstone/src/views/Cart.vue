@@ -27,7 +27,7 @@
 
     <!-- Right column for other content -->
     <div class="right-column">
-      <!-- Place other content here -->
+      
     </div>
   </div>
 </template>
@@ -75,7 +75,7 @@ const proceedToCheckout = () => {
 .two-column-layout {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 20px; /* Add spacing between columns */
+  gap: 20px; 
 }
 
 .left-column {
@@ -87,7 +87,7 @@ const proceedToCheckout = () => {
 .cart-items-container {
   display: grid;
   grid-template-columns: 1fr; /* Single column for cart items */
-  gap: 1rem; /* Add spacing between cart items */
+  gap: 1rem; 
 }
 
 .cart-footer {
@@ -111,24 +111,24 @@ const proceedToCheckout = () => {
 /* Style the cart item container */
 .cart-item {
   display: flex;
-  flex-direction: column; /* Stack title and image vertically */
-  align-items: center; /* Center horizontally */
+  flex-direction: column; 
+  align-items: center; 
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #fff;
   text-align: center; /* Center text */
 }
 
-/* Style the product title to truncate and maintain uniform size */
+
 .cart-item h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px; /* Adjust the max width as needed */
-  text-align: center; /* Center text */
+  max-width: 200px; 
+  text-align: center; 
 }
 
-/* Ensure that the image width remains consistent */
+
 .cart-item img {
   max-width: 100px;
   height: auto;
