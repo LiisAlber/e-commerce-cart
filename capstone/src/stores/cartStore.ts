@@ -80,15 +80,9 @@ export const useCartStore = defineStore('cart', {
 
     saveCartToStorage() {
       const userStore = useUserStore();
-      const storageKey = userStore.isAuthenticated
-        ? 'cartItems'
-        : 'guestCartItems';
-
-      if (userStore.isAuthenticated) {
-        localStorage.setItem(storageKey, JSON.stringify(this.cartItems));
-      } else {
-        sessionStorage.setItem(storageKey, JSON.stringify(this.cartItems));
-      }
-    },
+      const storageKey = userStore.isAuthenticated ? 'cartItems' : 'guestCartItems';
+      localStorage.setItem(storageKey, JSON.stringify(this.cartItems));
+  }
+  
   },
 });
