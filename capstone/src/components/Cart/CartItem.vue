@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item">
     <div class="product-details">
-      <img :src="item.image" alt="Product image" class="product-image">
+      <img :src="item.image" alt="Product image" class="product-image" />
       <div class="product-info">
         <h2>
           <router-link :to="'/product/' + item.id">
@@ -24,11 +24,10 @@ import { CartItemType } from '@/types/index.ts';
 defineProps({
   item: {
     type: Object as () => CartItemType,
-    required: true
-  }
+    required: true,
+  },
 });
 </script>
-
 
 <style scoped>
 .cart-item {
@@ -38,17 +37,15 @@ defineProps({
 }
 
 .product-image {
-  max-width: 80px; 
-  margin-right: 10px; 
+  max-width: 80px;
+  margin-right: 10px;
 }
 
 .product-info {
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .product-info h2 {
-  font-size: 16px; 
+  font-size: 16px;
 }
-
 </style>
-

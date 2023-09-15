@@ -1,14 +1,19 @@
 <template>
   <div class="product-detail">
     <h2>{{ selectedProduct?.title }}</h2>
-    <img :src="selectedProduct?.image" :alt="selectedProduct?.title" class="product-image" />
+    <img
+      :src="selectedProduct?.image"
+      :alt="selectedProduct?.title"
+      class="product-image"
+    />
     <p class="product-description">{{ selectedProduct?.description }}</p>
     <p class="product-price">Price: €{{ selectedProduct?.price }}</p>
-    <button @click="addProductToCart(selectedProduct)" v-if="selectedProduct">Add to Cart</button>
+    <button @click="addProductToCart(selectedProduct)" v-if="selectedProduct">
+      Add to Cart
+    </button>
     <button @click="goToCart">Close</button>
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
@@ -34,7 +39,7 @@ const fetchProductDetails = async () => {
     const response = await fakestoreAPI.get<Product>(`/products/${productId}`);
     selectedProduct.value = response.data;
   } catch (error) {
-    console.error("Error fetching product details:", error);
+    console.error('Error fetching product details:', error);
   }
 };
 
@@ -52,22 +57,21 @@ const goToCart = () => {
 };
 </script>
 
-
 <style scoped>
 .product-detail {
-  max-width: 600px; 
+  max-width: 600px;
   margin: 0 auto;
-  padding: 10px; 
+  padding: 10px;
   background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0/ 0/ 0/ 10%);
   text-align: center;
 }
 
 .product-image {
-  max-width: 100%; 
-  height: auto; 
+  max-width: 100%;
+  height: auto;
   margin-bottom: 20px;
-  display: block; 
+  display: block;
 }
 
 .product-description {
@@ -82,5 +86,3 @@ button {
   margin-top: 10px;
 }
 </style>
-
-  

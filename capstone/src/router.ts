@@ -4,18 +4,19 @@ import Home from '@/views/Home.vue';
 import ProductList from '@/views/ProductList.vue';
 import Cart from '@/views/Cart.vue';
 import ProductDetail from '@/components/ProductDetail.vue';
-
+import SignIn from '@/views/SignIn.vue';
+import SignUp from '@/views/SignUp.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/productlist',
     name: 'ProductList',
-    component: ProductList
+    component: ProductList,
   },
 
   {
@@ -24,20 +25,28 @@ const routes = [
     component: ProductDetail,
     props: true,
   },
-  
+
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
   },
-
-  
+  {
+    path: '/signin',
+    name: 'SignIn',
+    component: SignIn,
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp,
+  },
 ];
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
 
-  routes
+  routes,
 });
 
 export default router;
