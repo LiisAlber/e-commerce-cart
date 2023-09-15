@@ -3,12 +3,16 @@
     <div class="product-details">
       <img :src="item.image" alt="Product image" class="product-image">
       <div class="product-info">
-        <h2><router-link :to="'/product/' + item.id">{{ item.title }}</router-link></h2>
+        <h2>
+          <router-link :to="'/product/' + item.id">
+            {{ item.title }}
+          </router-link>
+        </h2>
         <p>Price: €{{ item.price.toFixed(2) }}</p>
         <p>Quantity: {{ item.quantity }}</p>
-        <button @click="$emit('increment', item)">+</button>
-        <button @click="$emit('decrement', item)">-</button>
-        <button @click="$emit('remove', item)">Remove from Cart</button>
+        <button @click="$emit('increment', item.id)">+</button>
+        <button @click="$emit('decrement', item.id)">-</button>
+        <button @click="$emit('remove', item.id)">Remove from Cart</button>
       </div>
     </div>
   </div>
@@ -24,6 +28,7 @@ defineProps({
   }
 });
 </script>
+
 
 <style scoped>
 .cart-item {

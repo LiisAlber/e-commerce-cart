@@ -20,33 +20,47 @@
       </div>
 
       <div v-if="cartItems.length > 0" class="cart-footer">
-        <p>Total: €{{ total.toFixed(2) }}</p>
-        <button @click="proceedToCheckout">Proceed to Checkout</button>
+        <p>Total: €{{ cartTotal.toFixed(2) }}</p>
+        <button @click="emptyCart">Empty Cart</button>
+        <button @click="initiateCheckout">Proceed to Checkout</button>
       </div>
     </div>
 
     <!-- Right column for other content -->
-    <div class="right-column">
-      
-    </div>
+    <div class="right-column" v-if="cartItems.length > 0 && proceedToCheckout">
+  <OrderSummary :cartItems="cartItems" :discount="discount" :total="cartTotal" />
+  <PaymentOptions />
+  <ShippingOptions />
+  <PromoCode @discountApplied="applyDiscount" />
+</div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { computed, ref } from 'vue'; 
+import { useCartStore } from '../stores/cartStore';
+import { CartItemType } from "@/types";
+import CartItem from '@/components/Cart/CartItem.vue';
+import OrderSummary from '@/components/Cart/OrderSummary.vue'; 
+import PaymentOptions from '@/components/Cart/PaymentOptions.vue'; 
+import ShippingOptions from '@/components/Cart/ShippingOptions.vue';
+import PromoCode from '@/components/Cart/PromoCode.vue';
 
-  <script setup lang="ts">
-  import { computed } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { useCartStore } from '../stores/cartStore';
-  import { CartItemType } from "@/types";
-  import CartItem from '@/components/CartItem.vue';
-  
-  const cartStore = useCartStore();
+const cartStore = useCartStore();
 
-// Use directly from the store
-const cartItems = cartStore.cartItems;
-const total = computed(() => {
-  return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+const cartItems = computed(() => cartStore.cartItems);
+
+let discount = ref(0);  // default discount is 0
+let proceedToCheckout = ref(false);  // default is false, indicating checkout hasn't begun
+
+
+const cartTotal = computed(() => {
+  return cartItems.value.reduce((acc, item) => acc + item.price * item.quantity, 0);
 });
+
+const applyDiscount = (discountValue: number) => {
+  discount.value = discountValue;
+};
 
 const incrementQuantity = (item: CartItemType) => {
   cartStore.updateQuantity({ productId: item.id, quantity: item.quantity + 1 });
@@ -62,12 +76,14 @@ const removeFromCart = (item: CartItemType) => {
   cartStore.removeFromCart(item.id);
 }
 
-
-const router = useRouter();
-
-const proceedToCheckout = () => {
-  router.push('/checkout');  
+const emptyCart = () => {
+  cartStore.emptyCart();
 }
+
+const initiateCheckout = () => {
+  proceedToCheckout.value = true;
+}
+
 </script>
 
 
@@ -75,8 +91,11 @@ const proceedToCheckout = () => {
 .two-column-layout {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 20px; 
+  gap: 20px;  
+  max-width: 1200px; /* Adjust as per your needs */
+  margin: 0 auto; /* Centers the container */
 }
+
 
 .left-column {
   padding: 20px;
@@ -102,6 +121,11 @@ const proceedToCheckout = () => {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  margin-right: 10px; 
+}
+
+.cart-footer button:last-child {
+  margin-right: 0;  
 }
 
 .cart-footer button:hover {
@@ -132,5 +156,15 @@ const proceedToCheckout = () => {
 .cart-item img {
   max-width: 100px;
   height: auto;
+}
+
+.right-column {
+    padding: 20px; /* Gives some space inside the right column */
+    background-color: #F7F9FC; /* Sample light blue background for distinction */
+}
+
+/* To add spacing between each component in the right column */
+.right-column > div {
+    margin-bottom: 20px;
 }
 </style>

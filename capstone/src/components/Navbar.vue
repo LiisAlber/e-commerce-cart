@@ -10,10 +10,23 @@
       <li><router-link to="/productlist">Products</router-link></li>
       <li>
         <router-link to="/cart">
-          <i class="fas fa-shopping-cart"></i> Cart
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" v-if="cartItemCount > 0">{{ cartItemCount }}</span>
+          Cart
         </router-link>
       </li>
     </ul>
+
+    <div class="quick-cart-view" v-if="isCartOpen">
+      <!-- List items in the cart -->
+      <div v-for="item in cartStore.cartItems" :key="item.id">
+          {{ item.title }} - {{ item.quantity }}
+      </div>
+      <!-- Show total price -->
+      <div>
+          Total: €{{ cartTotal.toFixed(2) }}
+      </div>
+    </div>
 
     <!-- Mobile burger icon -->
     <div v-else @click="toggleMenu" class="burger">
@@ -26,16 +39,20 @@
       <li @click="toggleMenu"><router-link to="/productlist">Products</router-link></li>
       <li @click="toggleCart">
         <router-link to="/cart">
-          <i class="fas fa-shopping-cart"></i> Cart
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" v-if="cartItemCount > 0">{{ cartItemCount }}</span>
+          Cart
         </router-link>
       </li>
     </ul>
+
   </nav>
 </template>
 
 
+
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useCartStore } from '../stores/cartStore'; 
 
 const cartStore = useCartStore(); // Initialize the cart store
@@ -71,6 +88,15 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', checkWindowSize);
 });
+
+const cartItemCount = computed(() => {
+  return cartStore.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+});
+
+const cartTotal = computed(() => {
+  return cartStore.cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+});
+
 </script>
 
 
@@ -159,5 +185,30 @@ nav a:hover {
     text-decoration: none; 
     color: #4C58C2; 
 }
+
+.cart-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
+
+.quick-cart-view {
+    position: absolute;
+    top: 60px; /* Adjust based on the height of your nav */
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* Or whatever width you prefer */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure it's on top of other elements */
+    padding: 1rem;
+}
+
 
 </style>
