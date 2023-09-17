@@ -1,18 +1,62 @@
-# Vue 3 + TypeScript + Vite
+# Capstone Shopping Cart Project
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Introduction
 
-## Recommended IDE Setup
+Welcome to the repository of my capstone project. This is an e-commerce simulation built with Vue 3 and TypeScript. In this README, you'll find instructions on how to review the project.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Getting Started
 
-## Type Support For `.vue` Imports in TS
+### Prerequisites
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Ensure you have Node.js and npm installed. If not, you can install them.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### Installation
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/capstone.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd capstone
+    ```
+
+3. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+4. Run the development server:
+    ```bash
+    npm run dev
+    ```
+
+5. Open your browser and go to `http://localhost:3000`.
+
+## Features
+
+- Add items to cart
+- Calculate shipping costs
+- Apply promo codes
+- Proceed to checkout
+
+## Project Structure
+
+- `src/components`: Contains all Vue components
+- `src/store`: Contains all Pinia store files
+- `src/views`: Contains all Vue pages
+- `tests`: Contains all test files
+
+## Troubleshooting
+
+If you run into any issues, please check the following:
+
+1. Ensure you have Node.js and npm installed.
+2. Ensure all dependencies are installed: Run `npm install` in the project directory.
+3. Check if your port 3000 is free.
+
+## Contributing
+
+If you find any bugs or have suggestions, please open an issue or submit a pull request. Your input is welcome!
+
