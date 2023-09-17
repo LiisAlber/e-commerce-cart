@@ -36,3 +36,65 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Utilizing your root colors */
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid var(--neutral-light);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0/ 0/ 0/ 10%);
+  background-color: #fff;
+}
+
+.sign-up h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--neutral-dark);
+}
+
+.sign-up form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-up input {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border: 1px solid var(--neutral-light);
+  border-radius: 5px;
+  font-size: 16px;
+  color: var(--neutral-dark);
+  outline: none;
+  transition: border 0.3s;
+}
+
+.sign-up input:focus {
+  border-color: var(--primary-color);
+}
+
+.sign-up button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sign-up button:hover {
+  background-color: var(--secondary-color);
+}
+
+.sign-up p {
+  font-size: 14px;
+  text-align: center;
+  color: var(--button-color);
+  color: var(--secondary-color);
+}
+</style>

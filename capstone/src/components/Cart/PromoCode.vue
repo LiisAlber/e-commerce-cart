@@ -2,6 +2,9 @@
   <div class="promo-code">
     <input v-model="code" placeholder="Enter promo code (e.g., promo10)" />
     <button @click="applyCode">Apply</button>
+    <!-- Success and Error Messages -->
+    <p v-if="successMessage" class="success">{{ successMessage }}</p>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
 </template>
 
@@ -9,16 +12,21 @@
 import { ref } from 'vue';
 
 const code = ref('');
+const errorMessage = ref('');
+const successMessage = ref('');
+
 const emit = defineEmits(['discountApplied']);
 
 const applyCode = () => {
   const promoCodePattern = /^PROMO[0-9]+$/i;
 
   if (promoCodePattern.test(code.value)) {
-    alert('Discount Applied!');
+    successMessage.value = 'Discount Applied!';
     emit('discountApplied', 0.1);
+    errorMessage.value = ''; // Reset the error message
   } else {
-    alert('Invalid Promo Code! Hint: Try promo10');
+    errorMessage.value = 'Invalid Promo Code! Hint: Try promo10';
+    successMessage.value = ''; // Reset the success message
   }
 };
 </script>
@@ -35,5 +43,13 @@ const applyCode = () => {
   padding: 8px;
   border: 1px solid #ddd;
   margin-top: 10px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
 }
 </style>

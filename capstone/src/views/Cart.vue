@@ -180,7 +180,7 @@ const cartTotalWithShipping = computed(() => {
 }
 
 .cart-footer button:hover {
-  background-color: #ff5050; /* A slightly darker shade of coral for hover */
+  background-color: #ff5050;
   transform: scale(1.05);
 }
 
@@ -226,7 +226,6 @@ const cartTotalWithShipping = computed(() => {
   border-radius: 5px;
 }
 
-/* To add spacing between each component in the right column */
 .right-column > div {
   margin-bottom: 20px;
 }
