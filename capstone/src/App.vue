@@ -26,6 +26,15 @@ const isCartOpen = cartStore.isCartOpen;
 </script>
 
 <style>
+:root {
+  --primary-color: #30a9de;
+  --button-color: #ff6b6b;
+  --item-link-color: #ff6b6b;
+  --secondary-color: #f46a6a;
+  --neutral-light: #f7f9fc;
+  --neutral-dark: #333;
+}
+
 #app {
   font-family: Roboto, sans-serif;
   text-align: center;
@@ -53,12 +62,20 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(
-    0 / 0 / 0 / 70%
-  ); /* semi-transparent black background */
+  background-color: rgba(0/ 0/ 0/ 70%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+}
+
+a,
+a:visited {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: #ff5050;
+  text-decoration: underline;
 }
 </style>

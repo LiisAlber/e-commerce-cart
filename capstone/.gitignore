@@ -23,4 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
+
+/coverage
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/test-results/
+/playwright-report/
+/playwright/.cache/

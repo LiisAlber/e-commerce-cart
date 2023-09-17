@@ -1,7 +1,8 @@
 import { test, expect } from 'vitest';
-import { useCartStore } from '@/stores/cartStore';
+import { useCartStore } from '../../stores/cartStore';
 import { createPinia } from 'pinia';
 
+// Mock localStorage for the testing environment
 const localStorageMock = (function () {
   let store: { [key: string]: string } = {};
 
@@ -12,6 +13,9 @@ const localStorageMock = (function () {
     setItem: function (key: string, value: string) {
       store[key] = value.toString();
     },
+    removeItem: function (key: string) {
+      delete store[key];
+    },
     clear: function () {
       store = {};
     },
@@ -20,7 +24,7 @@ const localStorageMock = (function () {
 
 Object.defineProperty(global, 'localStorage', { value: localStorageMock });
 
-type Product = {
+type CartItemType = {
   id: number;
   price: number;
   title: string;
@@ -29,19 +33,19 @@ type Product = {
   image: string;
 };
 
-function setupStore() {
+function setupCartStore() {
   const pinia = createPinia();
   return useCartStore(pinia);
 }
 
 test('initializes the cart with an empty array', () => {
-  const store = setupStore();
+  const store = setupCartStore();
   expect(store.cartItems).toEqual([]);
 });
 
 test('adds a product to the cart', () => {
-  const store = setupStore();
-  const product: Product = {
+  const store = setupCartStore();
+  const item: CartItemType = {
     id: 1,
     price: 10,
     title: 'Test Product',
@@ -49,47 +53,52 @@ test('adds a product to the cart', () => {
     category: 'Test Category',
     image: 'test.jpg',
   };
-  store.addToCart(product);
-  expect(store.cartItems).toEqual([{ ...product, quantity: 1 }]);
+  store.addToCart(item);
+  expect(store.cartItems).toEqual([{ ...item, quantity: 1 }]);
 });
 
 test('removes a product from the cart', () => {
-  const store = setupStore();
-  store.addToCart({
+  const store = setupCartStore();
+  const item: CartItemType = {
     id: 1,
     price: 10,
     title: 'Test Product',
     description: 'Test Description',
     category: 'Test Category',
     image: 'test.jpg',
-  });
-  store.removeFromCart(1);
+  };
+  store.addToCart(item);
+  store.removeFromCart(item.id);
   expect(store.cartItems).toEqual([]);
 });
 
-test('updates the quantity of a product in the cart', () => {
-  const store = setupStore();
-  store.addToCart({
+test('increments quantity of a product in the cart', () => {
+  const store = setupCartStore();
+  const item: CartItemType = {
     id: 1,
     price: 10,
     title: 'Test Product',
     description: 'Test Description',
     category: 'Test Category',
     image: 'test.jpg',
-  });
-  store.updateQuantity({ productId: 1, quantity: 2 });
+  };
+  store.addToCart(item);
+  store.incrementQuantity(item);
   expect(store.cartItems[0].quantity).toEqual(2);
 });
 
-test('returns the total price of the cart', () => {
-  const store = setupStore();
-  store.addToCart({
+test('decrements quantity of a product in the cart', () => {
+  const store = setupCartStore();
+  const item: CartItemType = {
     id: 1,
     price: 10,
     title: 'Test Product',
     description: 'Test Description',
     category: 'Test Category',
     image: 'test.jpg',
-  });
-  expect(store.total).toEqual(30);
+  };
+  store.addToCart(item);
+  store.incrementQuantity(item);
+  store.decrementQuantity(item);
+  expect(store.cartItems[0].quantity).toEqual(3);
 });

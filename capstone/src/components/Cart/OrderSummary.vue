@@ -19,7 +19,14 @@
       <strong>Discount: -€{{ discountValue.toFixed(2) }}</strong>
     </p>
     <p>
-      <strong>Total after discount: €{{ total.toFixed(2) }}</strong>
+      <strong>Shipping Cost: €{{ shippingCost.toFixed(2) }}</strong>
+    </p>
+    <p>
+      <strong
+        >Total after discount and shipping: €{{
+          totalWithShipping.toFixed(2)
+        }}</strong
+      >
     </p>
   </div>
 </template>
@@ -43,6 +50,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  shippingCost: {
+    type: Number,
+    required: true,
+  },
 });
 
 const originalTotal = computed(() =>
@@ -54,8 +65,11 @@ const originalTotal = computed(() =>
 const discountValue = computed(() =>
   Number((originalTotal.value * props.discount).toFixed(2)),
 );
-const total = computed(() =>
-  Number((originalTotal.value - discountValue.value).toFixed(2)),
+
+const totalWithShipping = computed(() =>
+  Number(
+    (originalTotal.value - discountValue.value + props.shippingCost).toFixed(2),
+  ),
 );
 
 // Function to truncate long titles
@@ -66,14 +80,26 @@ const truncateTitle = (title: string, maxLength: number = 25) => {
 
 <style scoped>
 .order-summary {
-  padding: 1rem;
-  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border: 1px solid var(--neutral-dark);
+  background-color: var(--neutral-light);
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0/ 0/ 0/ 5%);
   margin-bottom: 20px;
+}
+
+h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-family: Poppins, sans-serif;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
 }
 
 ul {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 1rem;
 }
 
 li {
@@ -82,7 +108,12 @@ li {
   align-items: center;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--neutral-dark);
+  transition: background-color 0.3s;
+}
+
+li:hover {
+  background-color: rgba(0/ 123/ 255/ 5%);
 }
 
 .item-title {
@@ -91,16 +122,27 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 1rem;
+  color: var(--neutral-dark);
 }
 
 .item-quantity {
   flex-basis: 50px;
   text-align: right;
   padding-right: 1rem;
+  color: var(--neutral-dark);
 }
 
 .item-total {
   flex-basis: 100px;
   text-align: right;
+  color: var(--neutral-dark);
+}
+
+strong {
+  color: var(--primary-color);
+}
+
+p {
+  margin: 0.5rem 0;
 }
 </style>

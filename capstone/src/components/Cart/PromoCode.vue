@@ -26,7 +26,7 @@ const applyCode = () => {
 <style scoped>
 .promo-code {
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--neutral-dark);
   margin-bottom: 20px;
 }
 

@@ -7,6 +7,15 @@ import ProductDetail from '@/components/ProductDetail.vue';
 import SignIn from '@/views/SignIn.vue';
 import SignUp from '@/views/SignUp.vue';
 
+export const RouteNames = {
+  Home: 'Home',
+  ProductList: 'ProductList',
+  ProductDetail: 'ProductDetail',
+  Cart: 'Cart',
+  SignIn: 'SignIn',
+  SignUp: 'SignUp',
+};
+
 const routes = [
   {
     path: '/',

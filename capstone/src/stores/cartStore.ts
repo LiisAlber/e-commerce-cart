@@ -14,18 +14,21 @@ export const useCartStore = defineStore('cart', {
         localStorage.getItem(storageKey) || '[]',
       ) as CartItemType[],
       isCartOpen: false,
+      discount: 0, // Represents the discount percentage (e.g., 10 for 10%)
     };
   },
 
   // Getters
   getters: {
     total(state) {
-      return state.cartItems.reduce(
+      const subtotal = state.cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0,
       );
+      return subtotal * (1 - state.discount / 100); // Calculate the total after applying the discount
     },
   },
+
   // Actions
   actions: {
     addToCart(product: Product) {
@@ -37,7 +40,7 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.cartItems.push({ ...product, quantity: 1 });
       }
-      this.saveCartToStorage(); // Adjusted the name here for clarity
+      this.saveCartToStorage();
     },
 
     removeFromCart(productId: number) {
@@ -62,7 +65,26 @@ export const useCartStore = defineStore('cart', {
       this.saveCartToStorage();
     },
 
-    // Methods for toggling cart visibility
+    incrementQuantity(product: Product) {
+      const existingProduct = this.cartItems.find(
+        (item: CartItemType) => item.id === product.id,
+      );
+      if (existingProduct) {
+        existingProduct.quantity++;
+      }
+      this.saveCartToStorage();
+    },
+
+    decrementQuantity(product: Product) {
+      const existingProduct = this.cartItems.find(
+        (item: CartItemType) => item.id === product.id,
+      );
+      if (existingProduct && existingProduct.quantity > 1) {
+        existingProduct.quantity--;
+      }
+      this.saveCartToStorage();
+    },
+
     showCart() {
       this.isCartOpen = true;
     },
@@ -73,16 +95,16 @@ export const useCartStore = defineStore('cart', {
 
     emptyCart() {
       this.cartItems = [];
-      localStorage.setItem('cart', JSON.stringify([]));
+      this.saveCartToStorage();
     },
 
     // Utility methods for Storage
-
     saveCartToStorage() {
       const userStore = useUserStore();
-      const storageKey = userStore.isAuthenticated ? 'cartItems' : 'guestCartItems';
+      const storageKey = userStore.isAuthenticated
+        ? 'cartItems'
+        : 'guestCartItems';
       localStorage.setItem(storageKey, JSON.stringify(this.cartItems));
-  }
-  
+    },
   },
 });
