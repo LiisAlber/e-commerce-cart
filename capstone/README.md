@@ -14,13 +14,10 @@ Ensure you have Node.js and npm installed. If not, you can install them.
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/capstone.git
+    git clone https://github.com/TuringCollegeSubmissions/lialber-FE.4.git
     ```
 
-2. Navigate to the project directory:
-    ```bash
-    cd capstone
-    ```
+2. Navigate to the project directory
 
 3. Install the dependencies:
     ```bash
@@ -32,31 +29,20 @@ Ensure you have Node.js and npm installed. If not, you can install them.
     npm run dev
     ```
 
-5. Open your browser and go to `http://localhost:3000`.
+5. Open your browser
 
 ## Features
 
 - Add items to cart
+- Proceed to checkout
 - Calculate shipping costs
 - Apply promo codes
-- Proceed to checkout
 
 ## Project Structure
 
 - `src/components`: Contains all Vue components
 - `src/store`: Contains all Pinia store files
 - `src/views`: Contains all Vue pages
-- `tests`: Contains all test files
+- `tests` and `e2e`: Contains all test files
 
-## Troubleshooting
-
-If you run into any issues, please check the following:
-
-1. Ensure you have Node.js and npm installed.
-2. Ensure all dependencies are installed: Run `npm install` in the project directory.
-3. Check if your port 3000 is free.
-
-## Contributing
-
-If you find any bugs or have suggestions, please open an issue or submit a pull request. Your input is welcome!
 
